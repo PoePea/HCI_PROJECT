@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jobs - WorkINPro</title>
+  <style>
+    html {
+      overflow-y: scroll;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f3f2ef;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: white;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+      padding: 10px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo-search {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: red;
+      margin-right: 20px;
+      white-space: nowrap;
+    }
+
+    .in-box {
+      border: 2px solid red;
+      padding: 0 4px;
+      border-radius: 4px;
+      color: red;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 14px;
+      position: relative;
+    }
+
+    .nav-item img {
+      width: 24px;
+      height: 24px;
+      margin-bottom: 4px;
+    }
+
+    .nav-item.active::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      width: 100%;
+      height: 3px;
+      background-color: red;
+      border-radius: 2px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 220px;
+      box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+      z-index: 1;
+      margin-top: 8px;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 10px 15px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .job-search {
+      padding: 80px;
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .job-search input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .job-listing {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .job-listing:hover {
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .job-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .job-company {
+      color: #666;
+      margin: 5px 0;
+    }
+
+    .job-location {
+      font-size: 14px;
+      color: #888;
+    }
+
+    .apply-btn, .toggle-btn {
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 8px 16px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .job-details {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-bar {
+        justify-content: flex-start;
+        gap: 20px;
+      }
+
+      .search-bar {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-search">
+        <div class="logo">Work<span class="in-box">IN</span>Pro</div>
+        <input type="text" class="search-bar" placeholder="Search WorkINPro...">
+      </div>
+      <nav class="nav-bar">
+        <a class="nav-item" href="index.html"><img src="elements/home.png" alt="Home">Home</a>
+        <a class="nav-item active" href="jobs.html"><img src="elements/job.png" alt="Jobs">Jobs</a>
+        <a class="nav-item" href="about.html"><img src="elements/about.png" alt="About">About</a>
+        <a class="nav-item" href="contact.html"><img src="elements/contact.png" alt="Contact">Contact</a>
+        <a class="nav-item" href="calendar.html"><img src="elements/calendar.png" alt="Calendar">Calendar</a>
+        <div class="dropdown nav-item">
+          <img src="elements/tan.png" alt="Profile">
+          <button class="dropbtn">Profile</button>
+          <div class="dropdown-content">
+            <a href="profile.html">View Profile</a>
+            <a href="#">Settings & Privacy</a>
+            <a href="#">Help</a>
+            <a href="#">Language</a>
+            <a href="#">Manage</a>
+            <a href="#">Posts & Activity</a>
+            <a href="login.html">Sign Out</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="job-search">
+      <input type="text" placeholder="Search jobs (e.g., Developer, Designer)">
+      <input type="text" placeholder="Location (e.g., New York, Remote)">
+    </div>
+
+    <!-- Initial Job Listing -->
+    <div class="job-listing">
+      <div class="job-title">Virtual Assistant</div>
+      <div class="job-company">Cyberbacker</div>
+      <div class="job-location">Remote</div>
+      <button class="apply-btn" onclick="window.open('https://forms.gle/1TCnuHxG3g3siDnz7')">Apply Now</button>
+      <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+      <div class="job-details">
+        Are you confused about finding the right company?<br><br>
+        CYBERBACKER offers a variety of job opportunities in various fields and business departments that could be a perfect fit for your skills and qualifications.<br><br>
+        <strong>Responsibilities:</strong><br>
+        - Transcription of calls<br>
+        - Call preparation and scheduling<br>
+        - Report and file management<br>
+        - Admin tasks and coordination<br><br>
+        <strong>Requirements:</strong><br>
+        - Independent problem-solving<br>
+        - Team player<br>
+        - Familiar with Google Workspace & Zoom<br><br>
+        💻 100% Work from home<br>
+        💸 Paid on time<br>
+        🤝 Work with awesome people<br><br>
+        Always check your email and spam folder for updates.
+      </div>
+    </div>
+
+    <!-- More Jobs Inserted Dynamically -->
+    <script>
+      const jobs = [
+        {title: "Content Writer", company: "WriteSmart Co.", location: "Remote"},
+        {title: "Data Analyst", company: "Insight Metrics", location: "New York, NY"},
+        {title: "Project Manager", company: "AgileWorks", location: "Remote"},
+        {title: "Customer Support Rep", company: "HelpHub", location: "Denver, CO"},
+        {title: "Software Engineer", company: "DevSolutions", location: "Austin, TX"},
+        {title: "Marketing Coordinator", company: "Brandify", location: "Los Angeles, CA"},
+        {title: "HR Specialist", company: "PeopleFirst", location: "Remote"}
+      ];
+
+      const jobContainer = document.querySelector("main");
+
+      jobs.forEach(job => {
+        const jobHTML = `
+        <div class="job-listing">
+          <div class="job-title">${job.title}</div>
+          <div class="job-company">${job.company}</div>
+          <div class="job-location">${job.location}</div>
+          <button class="apply-btn" onclick="alert('Redirecting to application form for ${job.title}')">Apply Now</button>
+          <button class="toggle-btn" onclick="toggleDetails(this)">View Details</button>
+          <div class="job-details">
+            Are you interested in working as a ${job.title}? This position at ${job.company} is a great opportunity for professionals looking to grow remotely or on-site.<br><br>
+            <strong>Responsibilities:</strong><br>
+            - Manage daily tasks related to ${job.title.toLowerCase()}<br>
+            - Collaborate with internal teams<br>
+            - Communicate effectively with clients or stakeholders<br><br>
+            <strong>Requirements:</strong><br>
+            - Relevant experience or education in the field<br>
+            - Excellent communication skills<br>
+            - Ability to meet deadlines and manage time efficiently<br><br>
+            💻 Flexible work arrangements<br>
+            💸 Competitive pay<br>
+            📈 Opportunities for advancement<br><br>
+            Check your inbox and spam folder after applying.
+          </div>
+        </div>`;
+        jobContainer.insertAdjacentHTML("beforeend", jobHTML);
+      });
+
+      function toggleDetails(button) {
+        const details = button.nextElementSibling;
+        const isVisible = details.style.display === "block";
+        details.style.display = isVisible ? "none" : "block";
+        button.textContent = isVisible ? "View Details" : "Hide Details";
+      }
+    </script>
+  </main>
+</body>
+</html>
